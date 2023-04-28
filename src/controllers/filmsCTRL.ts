@@ -9,6 +9,8 @@ import {
   updateFilmSRV
 } from 'services/filmsSRV';
 
+// ==============================================================
+
 export const getAllFilmsCTRL = async (_req: Request, res: Response) => {
   const data = await getAllFilmsSRV();
 
@@ -20,10 +22,14 @@ export const getAllFilmsCTRL = async (_req: Request, res: Response) => {
   return;
 };
 
+// ==============================================================
+
 export const getAllUsersFilmsCTRL = async (_req: Request, res: Response) => {
   res.status(200).json({ mes: 'users Films' });
   return;
 };
+
+// ==============================================================
 
 export const getFilmByIdCTRL = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -37,6 +43,8 @@ export const getFilmByIdCTRL = async (req: Request, res: Response) => {
   return;
 };
 
+// ==============================================================
+
 export const createFilmCTRL = async (req: Request, res: Response) => {
   const { director, title, date }: IFilm = req.body;
   const data = await createFilmSRV({ director, title, date });
@@ -44,6 +52,8 @@ export const createFilmCTRL = async (req: Request, res: Response) => {
   res.status(200).json(data);
   return;
 };
+
+// ==============================================================
 
 export const updateFilmCTRL = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -58,6 +68,8 @@ export const updateFilmCTRL = async (req: Request, res: Response) => {
   res.status(200).json(updatedData);
   return;
 };
+
+// ==============================================================
 
 export const deleteFilmCTRL = async (req: Request, res: Response) => {
   const { id } = req.params;

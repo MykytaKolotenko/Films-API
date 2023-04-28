@@ -14,7 +14,7 @@ interface IFilmReturnedformDb extends IFilm {
 
 const filmsSchema = new Schema<IFilm>(
   {
-    title: { type: String, require: true },
+    title: { type: String, require: true, unique: true },
     director: { type: String, require: true },
     date: {
       type: Date,
