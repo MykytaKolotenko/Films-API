@@ -13,10 +13,17 @@ import {
   updateFilmSRV
 } from 'services/filmsSRV';
 
+interface IQuery {
+  page?: number;
+  per_page?: number;
+}
+
 // ==============================================================
 
-export const getAllFilmsCTRL = async (_req: Request, res: Response) => {
-  const data = await getAllFilmsSRV();
+export const getAllFilmsCTRL = async (req: Request, res: Response) => {
+  const { page = 1, per_page = 5 }: IQuery = req.query;
+
+  const data = await getAllFilmsSRV(+page, +per_page);
 
   if (!data) throw errorGenerator(404, 'Something get wrong with MongoDB');
 
@@ -26,9 +33,10 @@ export const getAllFilmsCTRL = async (_req: Request, res: Response) => {
 // ==============================================================
 
 export const getAllUsersFilmsCTRL = async (req: Request, res: Response) => {
+  const { page = 1, per_page = 5 }: IQuery = req.query;
   const { userId } = req.params;
 
-  const data = await getUserFilmsSRV(userId);
+  const data = await getUserFilmsSRV(userId, +page, +per_page);
 
   res.status(200).json(data);
 };
