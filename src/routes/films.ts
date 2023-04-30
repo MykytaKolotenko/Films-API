@@ -8,17 +8,20 @@ import {
   updateFilmCTRL
 } from '../controllers/filmsCTRL';
 import assyncWrapper from 'helpers/errorWrapper';
+import postFilmVAL from '../middleware/validation/postFilmVAL';
+import privateRoute from 'middleware/privateRoute';
 
 const filmsRouter = express.Router();
 
 // Public
 filmsRouter.get('/', assyncWrapper(getAllFilmsCTRL));
-filmsRouter.get('/user/:id', assyncWrapper(getAllUsersFilmsCTRL));
+filmsRouter.get('/user/:userId', assyncWrapper(getAllUsersFilmsCTRL));
 filmsRouter.get('/:id', assyncWrapper(getFilmByIdCTRL));
 
 // Private
-filmsRouter.post('/', assyncWrapper(createFilmCTRL));
-filmsRouter.patch('/:id', assyncWrapper(updateFilmCTRL));
+filmsRouter.use(assyncWrapper(privateRoute));
+filmsRouter.post('/', postFilmVAL, assyncWrapper(createFilmCTRL));
+filmsRouter.patch('/:id', postFilmVAL, assyncWrapper(updateFilmCTRL));
 filmsRouter.delete('/:id', assyncWrapper(deleteFilmCTRL));
 
 export default filmsRouter;

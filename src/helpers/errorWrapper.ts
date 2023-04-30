@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import errorGenerator from './errorGenerator';
 
 interface IControllerFunction {
   (req: Request, res: Response, next: NextFunction): Promise<void>;
@@ -7,7 +8,9 @@ interface IControllerFunction {
 const assyncWrapper = (controller: IControllerFunction) => {
   return (req: Request, res: Response, next: NextFunction) => {
     controller(req, res, next).catch((error) => {
-      next(error);
+      error?.code
+        ? next(errorGenerator(error?.code, error.message))
+        : next(errorGenerator(error?.status, error.message));
     });
   };
 };

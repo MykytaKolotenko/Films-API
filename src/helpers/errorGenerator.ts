@@ -1,12 +1,17 @@
-export interface IError extends Error {
-  status?: number;
+export class CustomError extends Error {
+  constructor(public status: number, message: string) {
+    super(message);
+  }
 }
 
-const errorGenerator = (status: number, message: string) => {
-  const error: IError = new Error(message);
-  error.status = status;
+const errorGenerator = (status: number, message?: string) => {
+  switch (status) {
+    case 11000:
+      return new CustomError(409, 'This email is already registered');
 
-  return error;
+    default:
+      return new CustomError(status, message || 'Something went wrong');
+  }
 };
 
 export default errorGenerator;
