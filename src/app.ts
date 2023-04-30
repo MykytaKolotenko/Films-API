@@ -20,8 +20,8 @@ app.use((_req: Request, res: Response) => {
   return res.status(404).json({ message: 'Not found' });
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (err: CustomError, _req: Request, res: Response, _next: NextFunction) => {
     const { message = 'Server error', status = 500 } = err;
 
