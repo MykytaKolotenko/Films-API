@@ -11,8 +11,9 @@ async function connectMongo() {
 
   try {
     await mongoose.connect(URI_MONGO, {
+      useNewUrlParser: true,
       useUnifiedTopology: true,
-      useNewUrlParser: true
+      useFindAndModify: true
     });
 
     console.log(`Connected to MongoDB at ${URI_MONGO}`);

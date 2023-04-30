@@ -6,12 +6,13 @@ import {
 } from 'controllers/authCTRL';
 import express from 'express';
 import assyncWrapper from 'helpers/errorWrapper';
-import createUserVAL from 'middleware/validation/createUserVAL';
+import createUserCreateVAL from 'middleware/validation/createUserCreateVAL';
+import loginUserVAL from 'middleware/validation/loginUserVAL';
 
 const authRouter = express.Router();
 
-authRouter.post('/register', createUserVAL, assyncWrapper(registerCTRL));
-authRouter.post('/login', assyncWrapper(loginCTRL));
+authRouter.post('/register', createUserCreateVAL, assyncWrapper(registerCTRL));
+authRouter.post('/login', loginUserVAL, assyncWrapper(loginCTRL));
 authRouter.get('/current', assyncWrapper(currentCTRL));
 authRouter.get('/logout', assyncWrapper(logoutCTRL));
 

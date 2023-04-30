@@ -1,3 +1,4 @@
+import errorGenerator from 'helpers/errorGenerator';
 import { Schema, model } from 'mongoose';
 
 export interface IFilm {
@@ -17,10 +18,12 @@ const filmsSchema = new Schema<IFilm>(
   {
     title: {
       type: String,
-      require: true,
-      unique: [true, 'You have this film']
+      require: true
     },
-    director: { type: String, require: true },
+    director: {
+      type: String,
+      require: true
+    },
     date: {
       type: Date,
       require: true,
@@ -51,6 +54,25 @@ const filmsSchema = new Schema<IFilm>(
         delete ret._id;
         delete ret.__v;
       }
+    }
+  }
+);
+
+filmsSchema.post(
+  'save',
+  function (
+    error: Error,
+    _doc: IFilmReturnedformDb,
+    next: (err?: Error) => void
+  ) {
+    if (
+      error instanceof Error &&
+      error.name === 'MongoError' &&
+      (error as unknown as { code: number }).code === 11000
+    ) {
+      next(errorGenerator(404, 'You have this film already'));
+    } else {
+      next();
     }
   }
 );

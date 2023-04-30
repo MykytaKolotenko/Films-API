@@ -1,5 +1,6 @@
 import { IFilm } from 'db/films';
 import { Request, Response } from 'express';
+import checkOwner from 'helpers/checkOwner';
 import errorGenerator from 'helpers/errorGenerator';
 import { IPrivateRoute } from 'middleware/privateRoute';
 
@@ -66,14 +67,19 @@ export const createFilmCTRL = async (req: IPrivateRoute, res: Response) => {
 // ==============================================================
 
 export const updateFilmCTRL = async (req: Request, res: Response) => {
+  const token = req.headers.authorization;
   const { id } = req.params;
   const data: IFilm = req.body;
 
+  if (!data.title && !data.director && !data.date)
+    throw errorGenerator(404, 'Need some data to change it');
   const updatedData = await updateFilmSRV(id, data);
 
-  if (!data) {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  checkOwner(token!, updatedData.owner);
+
+  if (!updatedData)
     throw errorGenerator(404, 'Something wrong with id. Not found');
-  }
 
   res.status(200).json(updatedData);
 };
@@ -82,12 +88,15 @@ export const updateFilmCTRL = async (req: Request, res: Response) => {
 
 export const deleteFilmCTRL = async (req: Request, res: Response) => {
   const { id } = req.params;
+  const token = req.headers.authorization;
 
   const data = await deleteFilmSRV(id);
+  if (!data) throw errorGenerator(404, 'Film not found!');
 
-  if (!data) {
-    throw errorGenerator(404, 'Something wrong with id. Not found');
-  }
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  checkOwner(token!, data.owner);
+
+  if (!data) throw errorGenerator(404, 'Something wrong with id. Not found');
 
   res.status(200).json(data);
 };

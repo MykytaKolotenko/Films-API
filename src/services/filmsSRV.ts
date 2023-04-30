@@ -18,8 +18,9 @@ export const getFilmByIdSRV = async (id: string): Promise<IFilm> =>
 // ==============================================================
 
 export const createFilmSRV = async (body: IFilm): Promise<IFilm> => {
-  const data = await new Film(body);
-  data.save();
+  const data = new Film(body);
+
+  await data.save();
 
   return data;
 };
@@ -34,4 +35,8 @@ export const deleteFilmSRV = async (id: string): Promise<IFilm> =>
 export const updateFilmSRV = async (
   id: string,
   body: Partial<IFilm>
-): Promise<IFilm> => Film.findByIdAndUpdate(id, body, { new: true });
+): Promise<IFilm> => {
+  const data = await Film.findByIdAndUpdate(id, { ...body }, { new: true });
+
+  return data;
+};

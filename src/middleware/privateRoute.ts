@@ -13,20 +13,14 @@ const privateRoute = async (
   _res: Response,
   next: NextFunction
 ) => {
-  if (!req.headers.authorization) {
-    throw errorGenerator(401, 'Not authorized');
-  }
+  if (!req.headers.authorization) throw errorGenerator(401, 'Not authorized');
 
   const { id } = verifyToken(req.headers.authorization);
-  if (!id) {
-    throw errorGenerator(401, 'Invalid authorization token');
-  }
+  if (!id) throw errorGenerator(401, 'Invalid authorization token');
 
   const user = await getUserByIdSRV(id);
 
-  if (!user) {
-    throw errorGenerator(404, 'User not found or not authorized');
-  }
+  if (!user) throw errorGenerator(404, 'User not found or not authorized');
 
   req.user = user;
 

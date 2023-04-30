@@ -29,6 +29,7 @@ export const loginCTRL = async (req: Request, res: Response) => {
   if (!password) throw errorGenerator(401, 'No Password!');
 
   const user = await getUserByEmailSRV(email);
+
   if (!user) throw errorGenerator(404, 'User not found!');
 
   const correctPassword = await comparePassword(password, user.password);

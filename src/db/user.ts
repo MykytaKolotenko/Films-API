@@ -46,17 +46,24 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-userSchema.post('find', (error, next) => {
-  switch (error.code) {
-    case 'E11000':
-      throw errorGenerator(409, 'Email in use');
-
-    default:
-      break;
+userSchema.post(
+  'save',
+  function (
+    error: Error,
+    _doc: IUserReturnedformDb,
+    next: (err?: Error) => void
+  ) {
+    if (
+      error instanceof Error &&
+      error.name === 'MongoError' &&
+      (error as unknown as { code: number }).code === 11000
+    ) {
+      next(errorGenerator(404, 'This email is alredy used'));
+    } else {
+      next();
+    }
   }
-
-  next();
-});
+);
 
 const User = model<IUser>('user', userSchema);
 

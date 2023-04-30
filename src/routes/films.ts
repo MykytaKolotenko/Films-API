@@ -10,6 +10,7 @@ import {
 import assyncWrapper from 'helpers/errorWrapper';
 import postFilmVAL from '../middleware/validation/postFilmVAL';
 import privateRoute from 'middleware/privateRoute';
+import patchFilmVAL from 'middleware/validation/patchFilmVAL';
 
 const filmsRouter = express.Router();
 
@@ -21,7 +22,7 @@ filmsRouter.get('/:id', assyncWrapper(getFilmByIdCTRL));
 // Private
 filmsRouter.use(assyncWrapper(privateRoute));
 filmsRouter.post('/', postFilmVAL, assyncWrapper(createFilmCTRL));
-filmsRouter.patch('/:id', postFilmVAL, assyncWrapper(updateFilmCTRL));
+filmsRouter.patch('/:id', patchFilmVAL, assyncWrapper(updateFilmCTRL));
 filmsRouter.delete('/:id', assyncWrapper(deleteFilmCTRL));
 
 export default filmsRouter;
