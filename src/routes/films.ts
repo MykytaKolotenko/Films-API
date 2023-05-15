@@ -7,10 +7,10 @@ import {
   getFilmByIdCTRL,
   updateFilmCTRL
 } from '../controllers/filmsCTRL';
-import assyncWrapper from 'helpers/errorWrapper';
+import assyncWrapper from '../helpers/errorWrapper';
 import postFilmVAL from '../middleware/validation/postFilmVAL';
-import privateRoute from 'middleware/privateRoute';
-import patchFilmVAL from 'middleware/validation/patchFilmVAL';
+import privateRoute from '../middleware/privateRoute';
+import patchFilmVAL from '../middleware/validation/patchFilmVAL';
 
 const filmsRouter = express.Router();
 

@@ -1,4 +1,4 @@
-import errorGenerator from 'helpers/errorGenerator';
+import errorGenerator from '../helpers/errorGenerator';
 import { Schema, model } from 'mongoose';
 
 export interface IFilm {

@@ -1,8 +1,8 @@
-import { IFilm } from 'db/films';
+import { IFilm } from '../db/films';
 import { Request, Response } from 'express';
-import checkOwner from 'helpers/checkOwner';
-import errorGenerator from 'helpers/errorGenerator';
-import { IPrivateRoute } from 'middleware/privateRoute';
+import checkOwner from '../helpers/checkOwner';
+import errorGenerator from '../helpers/errorGenerator';
+import { IPrivateRoute } from '../middleware/privateRoute';
 
 import {
   createFilmSRV,
@@ -11,7 +11,7 @@ import {
   getFilmByIdSRV,
   getUserFilmsSRV,
   updateFilmSRV
-} from 'services/filmsSRV';
+} from '../services/filmsSRV';
 
 interface IQuery {
   page?: number;

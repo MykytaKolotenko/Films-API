@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import errorGenerator from './errorGenerator';
-import { IUserReturnedformDb } from 'db/user';
+import { IUserReturnedformDb } from '../db/user';
 
 dotenv.config();
 

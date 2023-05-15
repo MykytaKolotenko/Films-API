@@ -1,8 +1,8 @@
 import { IUserReturnedformDb } from 'db/user';
 import { Request, Response, NextFunction } from 'express';
-import errorGenerator from 'helpers/errorGenerator';
-import { verifyToken } from 'helpers/jwt';
-import { getUserByIdSRV } from 'services/authSRV';
+import errorGenerator from '../helpers/errorGenerator';
+import { verifyToken } from '../helpers/jwt';
+import { getUserByIdSRV } from '../services/authSRV';
 
 export interface IPrivateRoute extends Request {
   user?: Partial<IUserReturnedformDb>;

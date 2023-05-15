@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import connectMongo from 'db/connect';
+import connectMongo from './db/connect';
 import app from './app';
 
 const PORT: number = Number(process.env.PORT) || 3000;

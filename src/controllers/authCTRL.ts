@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import errorGenerator from 'helpers/errorGenerator';
-import { comparePassword, hashPassword } from 'helpers/hash';
-import { createToken, verifyToken } from 'helpers/jwt';
+import errorGenerator from '../helpers/errorGenerator';
+import { comparePassword, hashPassword } from '../helpers/hash';
+import { createToken, verifyToken } from '../helpers/jwt';
 import {
   getUserByEmailSRV,
   getUserByIdSRV,
   registerSRV,
   setTokenSRV
-} from 'services/authSRV';
+} from '../services/authSRV';
 
 // ====================================================================
 

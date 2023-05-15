@@ -1,5 +1,5 @@
 import { NextFunction, RequestHandler, Response, Request } from 'express';
-import errorGenerator from 'helpers/errorGenerator';
+import errorGenerator from '../../helpers/errorGenerator';
 import errorWrapper from '../../helpers/errorWrapper';
 import Joi from 'joi';
 

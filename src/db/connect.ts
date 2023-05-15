@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import errorGenerator from 'helpers/errorGenerator';
+import errorGenerator from '../helpers/errorGenerator';
 
 dotenv.config();
 

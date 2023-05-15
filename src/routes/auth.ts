@@ -3,11 +3,11 @@ import {
   currentCTRL,
   logoutCTRL,
   registerCTRL
-} from 'controllers/authCTRL';
+} from '../controllers/authCTRL';
 import express from 'express';
-import assyncWrapper from 'helpers/errorWrapper';
-import createUserCreateVAL from 'middleware/validation/createUserCreateVAL';
-import loginUserVAL from 'middleware/validation/loginUserVAL';
+import assyncWrapper from '../helpers/errorWrapper';
+import createUserCreateVAL from '../middleware/validation/createUserCreateVAL';
+import loginUserVAL from '../middleware/validation/loginUserVAL';
 
 const authRouter = express.Router();
 

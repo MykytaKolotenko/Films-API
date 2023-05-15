@@ -1,4 +1,4 @@
-import Film, { IFilm } from 'db/films';
+import Film, { IFilm } from '../db/films';
 
 const displayFields = 'title id director date';
 

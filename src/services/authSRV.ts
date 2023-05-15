@@ -1,4 +1,4 @@
-import User, { IUser } from 'db/user';
+import User, { IUser } from '../db/user';
 
 export const registerSRV = async (body: IUser) => {
   const data = new User(body);

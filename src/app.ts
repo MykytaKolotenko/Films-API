@@ -3,13 +3,13 @@ dotenv.config();
 import express, { NextFunction, Request, Response } from 'express';
 import logger from 'morgan';
 import cors from 'cors';
-import filmsRouter from 'routes/films';
-import { CustomError } from 'helpers/errorGenerator';
-import authRouter from 'routes/auth';
+import filmsRouter from './routes/films';
+import { CustomError } from './helpers/errorGenerator';
+import authRouter from './routes/auth';
 
 const app = express();
 
-app.use(logger('dev'));
+app.use(logger('common'));
 app.use(cors());
 app.use(express.json());
 
